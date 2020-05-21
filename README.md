@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.com/jdrew82/netbox_tunnels_plugin.svg?token=XHesDxGFcPtaq1Q3URi5&branch=master)](https://travis-ci.com/jdrew82/netbox_tunnels_plugin)
 
 A plugin for [NetBox](https://github.com/netbox-community/netbox) to support documentation of network tunneling
- protocols, ie I, GRE, L2TP, etc.
+ protocols, ie IPsec, GRE, L2TP, etc.
 
 ## Installation
 
