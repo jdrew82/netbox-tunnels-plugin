@@ -20,7 +20,7 @@ class TunnelConfig(PluginConfig):
     name = 'netbox_tunnels_plugin'
     verbose_name = 'Tunnels'
     description = 'Netbox Tunnels Plugin'
-    version = '0.0.1'
+    version = '0.1.0'
     base_url = 'tunnels'
     author = 'Justin Drew'
     author_email = '***REMOVED***'
