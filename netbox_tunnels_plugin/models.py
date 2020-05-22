@@ -16,7 +16,7 @@ from ipam.models import Device
 from .choices import TunnelStatusChoices
 
 
-class VirtualCircuit(models.Model):
+class Tunnel(models.Model):
     """Tunnel model."""
 
     tunnel_id = models.PositiveSmallIntegerField(
