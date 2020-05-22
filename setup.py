@@ -21,6 +21,7 @@ setup(
         '': ['LICENSE'],
     },
     install_requires=[],
+    min_version='2.8.3',
     packages=find_packages(),
     include_package_data=True
 )
