@@ -127,3 +127,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Mac store file
+.DS_Store
+
+# VSCode & PyCharm Settings
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/netbox_tunnels_plugin.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.vscode/settings.json
