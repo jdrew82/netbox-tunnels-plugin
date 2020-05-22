@@ -28,3 +28,20 @@ class TunnelStatusChoices(ChoiceSet):
         (STATUS_PENDING_DELETION, 'Pending Deletion'),
         (STATUS_CONFIGURATION_ERROR, 'Configuration Error'),
     )
+
+class TunnelTypeChoices(ChoiceSet):
+    """List of possible types of Tunnels."""
+
+    IPSEC_TUNNEL = 'ipsec-tunnel'
+    GRE_TUNNEL = 'gre-tunnel'
+    L2TP_TUNNEL = 'l2tp-tunnel'
+    PPTP_TUNNEL = 'pptp-tunnel'
+    CIPE_TUNNEL = 'cipe-tunnel'
+
+    CHOICES = (
+        (IPSEC_TUNNEL, 'IPSec Tunnel'),
+        (GRE_TUNNEL, 'GRE Tunnel'),
+        (L2TP_TUNNEL, 'L2TP Tunnel'),
+        (PPTP_TUNNEL, 'PPTP Tunnel'),
+        (CIPE_TUNNEL, 'CIPE Tunnel')
+    )

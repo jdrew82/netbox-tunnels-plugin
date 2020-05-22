@@ -19,7 +19,7 @@ from dcim.models import Site, Platform, DeviceRole, DeviceType
 from extras.forms import CustomFieldModelCSVForm
 
 from .models import Tunnel
-from .choices import TunnelStatusChoices
+from .choices import TunnelStatusChoices, TunnelTypeChoices
 from .utils.credentials import Credentials
 
 BLANK_CHOICE = (("", "---------"),)
@@ -32,16 +32,17 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
 
     dst_address = forms.CharField(required=True, label="Peer IP address", help_text="IP address of the peer device")
 
-    psk = forms.CharField(required=False,
-                          widget=forms.PasswordInput,
-                          help_text="Pre-shared key (will not be stored in database)")
-
     tunnel_type = forms.ModelChoiceField(
-        queryset=DeviceType.objects.all(),
+        queryset=TunnelTypeChoices.objects.all(),
         required=True,
+        label="Tunnel type"
         to_field_name="slug",
         help_text="Tunnel type. This must be specified.",
     )
+
+    psk = forms.CharField(required=False,
+                          widget=forms.PasswordInput,
+                          help_text="Pre-shared key (will not be stored in database)")
 
     class Meta:  # noqa: D106 "Missing docstring in public nested class"
         model = OnboardingTask
@@ -65,8 +66,8 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
 
     src_address = forms.CharField(required=True, help_text="IP Address of the source device")
     dst_address = forms.CharField(required=True, help_text="IP Address of the peer device")
-    psk = forms.CharField(required=False, help_text="Pre-shared key, will not be stored in database")
     tunnel_type = forms.CharField(required=True, help_text="Specified tunnel type.")
+    psk = forms.CharField(required=False, help_text="Pre-shared key, will not be stored in database")
 
     class Meta:  # noqa: D106 "Missing docstring in public nested class"
         model = Tunnel
