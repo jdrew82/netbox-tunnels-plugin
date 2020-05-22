@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from django.contrib import admin
-from .models import TunnelDevice
+from .models import Tunnel
 
 
-@admin.register(TunnelDevice)
+@admin.register(Tunnel)
 class TunnelAdmin(admin.ModelAdmin):
     """Administrative view for managing Tunnel instances."""
 
