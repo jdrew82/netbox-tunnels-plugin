@@ -139,3 +139,6 @@ dmypy.json
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .vscode/settings.json
+
+# Travis-CI setting
+.travis.yml
