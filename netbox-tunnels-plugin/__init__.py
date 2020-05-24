@@ -17,7 +17,7 @@ from extras.plugins import PluginConfig
 class TunnelConfig(PluginConfig):
     """This class defines attributes for the NetBox Tunnels Plugin."""
 
-    name = 'netbox_tunnels_plugin'
+    name = 'netbox-tunnels-plugin'
     verbose_name = 'Tunnels'
     description = 'Netbox Tunnels Plugin'
     version = '0.1.0'
