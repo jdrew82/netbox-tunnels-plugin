@@ -1,7 +1,7 @@
 # Netbox Tunnels Plugin
 
 <!-- Build status with linky to the builds for ease of access. -->
-[![Build Status](https://travis-ci.com/jdrew82/netbox_tunnels_plugin.svg?token=XHesDxGFcPtaq1Q3URi5&branch=master)](https://travis-ci.com/jdrew82/netbox_tunnels_plugin)
+[![Build Status](https://travis-ci.com/jdrew82/netbox-tunnels-plugin.svg?token=XHesDxGFcPtaq1Q3URi5&branch=master)](https://travis-ci.com/jdrew82/netbox-tunnels-plugin)
 
 A plugin for [NetBox](https://github.com/netbox-community/netbox) to support documentation of network tunneling
  protocols, ie IPsec, GRE, L2TP, etc.
@@ -10,7 +10,7 @@ A plugin for [NetBox](https://github.com/netbox-community/netbox) to support doc
 
 The plugin is available as a Python package in pypi and can be installed with pip
 ```shell
-pip install netbox_tunnels_plugin
+pip install netbox-tunnels-plugin
 ```
 
 Once installed, the plugin needs to be enabled in your `configuration.py`
