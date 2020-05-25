@@ -19,16 +19,8 @@ class TunnelAdmin(admin.ModelAdmin):
     """Administrative view for managing Tunnel instances."""
 
     list_display = (
-        "pk",
-        "created_tunnel",
-        "ip_address",
-        "site",
-        "role",
-        "device_type",
+        "tunnel_id",
+        "name",
         "status",
-        "message",
-        "failed_reason",
-        "port",
-        "timeout",
-        "created_on",
+        "context"
     )
