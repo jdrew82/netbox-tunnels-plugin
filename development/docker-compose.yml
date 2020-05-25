@@ -19,7 +19,7 @@ services:
     volumes:
       - ./base_configuration.py:/opt/netbox/netbox/netbox/base_configuration.py
       - ./netbox_${NETBOX_VER}/configuration.py:/opt/netbox/netbox/netbox/configuration.py
-      - ../netbox-tunnels-plugin:/source/netbox-tunnels-plugin
+      - ../netbox_tunnels_plugin:/source/netbox_tunnels_plugin
     tty: true
   worker:
     build:
@@ -34,13 +34,13 @@ services:
     volumes:
       - ./base_configuration.py:/opt/netbox/netbox/netbox/base_configuration.py
       - ./netbox_${NETBOX_VER}/configuration.py:/opt/netbox/netbox/netbox/configuration.py
-      - ../netbox-tunnels-plugin:/source/netbox-tunnels-plugin
+      - ../netbox_tunnels_plugin:/source/netbox_tunnels_plugin
     tty: true
   postgres:
     image: postgres:10
     env_file: dev.env
     volumes:
-      - pgdata_netbox-tunnels-plugin:/var/lib/postgresql/data
+      - pgdata_netbox_tunnels_plugin:/var/lib/postgresql/data
   redis:
     image: redis:5-alpine
     command:
