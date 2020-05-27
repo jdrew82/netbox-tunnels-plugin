@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Tunnels</h1>
+    <table class="table table-hover panel-body attr-table">
+        <tr style="background-color:#f8f8f8;">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Tunnel Type</th>
+            <th>Source Address<</th>
+            <th>Destination Address</th>
+        </tr>
+        {% for tunnel in tunnels %}
+        <tr>
+            <td><a href="{% url 'plugins:netbox_tunnels:tunnels' tunnel_id=tunnel.tunnel_id %}">{{ tunnel.tunnel_id}}</a></td>
+            <td>{{ tunnel.name }}</td>
+            <td>{{ tunnel.get_status_display }}</td>
+            <td>{{ tunnel.tunnel_type }}</td>
+            <td>{{ tunnel.src_address }}</td>
+            <td>{{ tunnel.dst_address }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No Tunnels defined!</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
