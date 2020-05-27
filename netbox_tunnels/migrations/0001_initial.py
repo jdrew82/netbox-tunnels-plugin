@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(default='pending-configuration', max_length=30)),
                 ('tunnel_type', models.CharField(default='ipsec-tunnel', max_length=30)),
                 ('src_address', models.CharField(blank=True, max_length=28)),
-                ('peer_address', models.CharField(blank=True, max_length=28)),
+                ('dst_address', models.CharField(blank=True, max_length=28)),
                 ('psk', models.CharField(blank=True, max_length=100)),
             ],
             options={
