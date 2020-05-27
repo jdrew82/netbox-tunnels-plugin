@@ -23,7 +23,7 @@ NAME = os.getenv("IMAGE_NAME", "netbox-tunnels-plugin")
 PWD = os.getcwd()
 
 COMPOSE_FILE = "development/docker-compose.yml"
-BUILD_NAME = "netbox_tunnels_plugin"
+BUILD_NAME = "netbox_tunnels"
 
 
 # ------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ def unittest(context, netbox_ver=NETBOX_VER, python_ver=PYTHON_VER):
     """
     docker = f"docker-compose -f {COMPOSE_FILE} -p {BUILD_NAME} run netbox"
     context.run(
-        f'{docker} sh -c "python manage.py test netbox_tunnels_plugin"',
+        f'{docker} sh -c "python manage.py test netbox_tunnels"',
         env={"NETBOX_VER": netbox_ver, "PYTHON_VER": python_ver},
         pty=True,
     )
@@ -256,7 +256,7 @@ def black(context, netbox_ver=NETBOX_VER, python_ver=PYTHON_VER):
 
 @task
 def pydocstyle(context, netbox_ver=NETBOX_VER, python_ver=PYTHON_VER):
-    """Run pydocstyle to validate docstring formatting adheres to defined standards.
+    """Run pydocstyle to validate docstring formatting adheres to NTC defined standards.
 
     Args:
         context (obj): Used to run specific commands
