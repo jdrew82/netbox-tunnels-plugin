@@ -18,7 +18,7 @@ from utilities.forms import BootstrapMixin
 from dcim.models import Site, Platform, DeviceRole, DeviceType
 from extras.forms import CustomFieldModelCSVForm
 
-from .models import Tunnel
+from .models import Tunnels
 from .choices import TunnelStatusChoices, TunnelTypeChoices
 from .utils.credentials import Credentials
 
@@ -35,17 +35,17 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
     tunnel_type = forms.ModelChoiceField(
         queryset=TunnelTypeChoices.objects.all(),
         required=True,
-        label="Tunnel type"
+        label="Tunnel type",
         to_field_name="slug",
         help_text="Tunnel type. This must be specified.",
     )
 
-    psk = forms.CharField(required=False,
-                          widget=forms.PasswordInput,
-                          help_text="Pre-shared key (will not be stored in database)")
+    psk = forms.CharField(
+        required=False, widget=forms.PasswordInput, help_text="Pre-shared key (will not be stored in database)"
+    )
 
-    class Meta:  # noqa: D106 "Missing docstring in public nested class"
-        model = OnboardingTask
+    class Meta:
+        model = Tunnels
         fields = [
             "src_address",
             "dst_address",
@@ -69,9 +69,9 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
     tunnel_type = forms.CharField(required=True, help_text="Specified tunnel type.")
     psk = forms.CharField(required=False, help_text="Pre-shared key, will not be stored in database")
 
-    class Meta:  # noqa: D106 "Missing docstring in public nested class"
-        model = Tunnel
-        fields = Tunnel.csv_headers
+    class Meta:
+        model = Tunnels
+        fields = Tunnels.csv_headers
 
     def save(self, commit=True, **kwargs):
         """Save the model, and add it and the associated PSK."""

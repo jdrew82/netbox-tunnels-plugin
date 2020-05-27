@@ -17,7 +17,7 @@ from utilities.views import BulkDeleteView, BulkImportView, ObjectEditView, Obje
 
 from .filters import TunnelFilter
 from .forms import TunnelCreationForm, TunnelCreationCSVForm
-from .models import Tunnel
+from .models import Tunnels
 
 log.setLevel(logging.DEBUG)
 
@@ -25,34 +25,38 @@ log.setLevel(logging.DEBUG)
 class TunnelListView(PermissionRequiredMixin, ObjectListView):
     """View for listing all Tunnels."""
 
+    def get(self, request):
+        tunnels = Tunnels.objects.all()
+        return render(request, "netbox_tunnels/tunnels_list.html", {"tunnels": tunnels,})
+
     permission_required = "netbox_tunnels.view_tunnels"
-    queryset = Tunnel.objects.all().order_by("-id")
+    # queryset = Tunnels.objects.all().order_by("-id")
     filterset = TunnelFilter
-    template_name = "netbox_tunnels/tunnel_list.html"
+    # template_name = "netbox_tunnels/tunnels_list.html"
 
 
 class TunnelCreateView(PermissionRequiredMixin, ObjectEditView):
     """View for creating a new Tunnels."""
 
-    permission_required = "netbox_onboarding.add_onboardingtask"
-    model = Tunnel
-    queryset = Tunnel.objects.all()
+    permission_required = "netbox_tunnels.tunnels_creation"
+    model = Tunnels
+    queryset = Tunnels.objects.all()
     model_form = TunnelCreationForm
-    template_name = "netbox_tunnels/tunnels_edit.html"
-    default_return_url = "plugins:netbox_onboarding:onboarding_task_list"
-
-
-class TunnelBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
-    """View for deleting one or more Tunnels."""
-
-    permission_required = "netbox_tunnels.delete_tunnels"
-    queryset = Tunnel.objects.filter()
+    template_name = "netbox_tunnels/tunnels_creation.html"
     default_return_url = "plugins:netbox_tunnels:tunnels_list"
 
 
-class TunnelFeedBulkImportView(PermissionRequiredMixin, BulkImportView):
-    """View for bulk-importing a CSV file to create Tunnels."""
+# class TunnelBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
+# """View for deleting one or more Tunnels."""
+#
+# permission_required = "netbox_tunnels.delete_tunnels"
+# queryset = Tunnels.objects.filter()
+# default_return_url = "plugins:netbox_tunnels:tunnels_list"
 
-    permission_required = "netbox_tunnels.add_tunnels"
-    model_form = TunnelCreationCSVForm
-    default_return_url = "plugins:netbox_onboarding:tunnels_list"
+ 
+# class TunnelFeedBulkImportView(PermissionRequiredMixin, BulkImportView):
+# """View for bulk-importing a CSV file to create Tunnels."""
+#
+# permission_required = "netbox_tunnels.add_tunnels"
+# model_form = TunnelCreationCSVForm
+# default_return_url = "plugins:netbox_onboarding:tunnels_list"

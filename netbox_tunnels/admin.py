@@ -1,4 +1,4 @@
-"""Administrative capabilities for netbox_tunnels plugin.
+"""Administrative capabilities for netbox_tunnelss plugin.
 (c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,16 +11,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from django.contrib import admin
-from .models import Tunnel
+from .models import Tunnels, TunnelsDevice
 
 
-@admin.register(Tunnel)
-class TunnelAdmin(admin.ModelAdmin):
-    """Administrative view for managing Tunnel instances."""
+@admin.register(Tunnels)
+class TunnelsAdmin(admin.ModelAdmin):
+    """Administrative view for managing Tunnels instances."""
 
-    list_display = (
-        "tunnel_id",
-        "name",
-        "status",
-        "tunnel_type"
-    )
+    list_display = ("tunnel_id", "name", "status", "tunnel_type")
+
+
+@admin.register(TunnelsDevice)
+class TunnelsDeviceAdmin(admin.ModelAdmin):
+    """Administrative view for managing Tunnels to Device instances."""
+
+    list_display = ("tunnels", "device")

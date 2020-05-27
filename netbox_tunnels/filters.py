@@ -18,42 +18,33 @@ from django.db.models import Q
 from dcim.models import Site, DeviceRole, Platform
 from utilities.filters import NameSlugSearchFilterSet
 
-from .models import Tunnel
+from .models import Tunnels
 
 
 class TunnelFilter(NameSlugSearchFilterSet):
-    """Filter capabilities for OnboardingTask instances."""
+    """Filter capabilities for Tunnel instances."""
 
     q = django_filters.CharFilter(method="search", label="Search",)
 
-    tunnel_id = django_filters.ModelMultipleChoiceFilter(queryset=Tunnel.objects.all(), label="Tunnel (ID)",)
-
     name = django_filters.ModelMultipleChoiceFilter(
-        field_name="name__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Name (slug)",
+        field_name="name__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Name (slug)",
     )
 
     status = django_filters.ModelMultipleChoiceFilter(
-        field_name="status__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Status (slug)",
+        field_name="status__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Status (slug)",
     )
 
-    context = django_filters.ModelMultipleChoiceFilter(
-        field_name="context__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Context (slug)",
+    tunnel_type = django_filters.ModelMultipleChoiceFilter(
+        field_name="context__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Type (slug)",
     )
 
-    class Meta:  # noqa: D106 "Missing docstring in public nested class"
-        model = Tunnel
-        fields = ["tunnel_id", "name", "status", "context"]
+    class Meta:
+        model = Tunnels
+        fields = ["name", "status", "tunnel_type"]
 
     def search(self, queryset, name, value):
         """Perform the filtered search."""
         if not value.strip():
             return queryset
-        qs_filter = (
-            Q(tunnel_id__icontains=value)
-            | Q(ip_address__icontains=value)
-            | Q(platform__name__icontains=value)
-            | Q(device__icontains=value)
-            | Q(status__icontains=value)
-            | Q(message__icontains=value)
-        )
+        qs_filter = Q(name__icontains=value) | Q(status__icontains=value) | Q(tunnel_type__icontains=value)
         return queryset.filter(qs_filter)

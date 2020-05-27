@@ -14,19 +14,19 @@ limitations under the License.
 from extras.plugins import PluginConfig
 
 
-class TunnelConfig(PluginConfig):
+class TunnelsConfig(PluginConfig):
     """This class defines attributes for the NetBox Tunnels Plugin."""
 
-    name = 'netbox_tunnels'
-    verbose_name = 'Tunnels'
-    description = 'Netbox Tunnels'
-    version = '0.2.3'
-    base_url = 'tunnels'
-    author = 'Justin Drew'
-    author_email = '***REMOVED***'
+    name = "netbox_tunnels"
+    verbose_name = "Tunnels"
+    description = "Netbox Tunnels"
+    version = "0.2.3"
+    base_url = "tunnels"
+    author = "Justin Drew"
+    author_email = "***REMOVED***"
     required_settings = []
-    default_settings = {}
-    caching_config = {}
+    # default_settings = {}
+    # caching_config = {}
 
 
-config = TunnelConfig
+config = TunnelsConfig

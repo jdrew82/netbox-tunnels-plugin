@@ -16,61 +16,31 @@ from ipam.models import Device
 from .choices import TunnelStatusChoices, TunnelTypeChoices
 
 
-class Tunnel(models.Model):
-    """Tunnel model."""
+class Tunnels(models.Model):
+    """Tunnels model."""
 
-    tunnel_id = models.AutoField(
-        primary_key=True
-    )
-    name = models.CharField(
-        max_length=64
-    )
+    tunnel_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=64)
     status = models.CharField(
-        max_length=30,
-        choices=TunnelStatusChoices,
-        default=TunnelStatusChoices.STATUS_PENDING_CONFIGURATION
+        max_length=30, choices=TunnelStatusChoices, default=TunnelStatusChoices.STATUS_PENDING_CONFIGURATION
     )
-    tunnel_type = models.CharField(
-        max_length=30,
-        choices=TunnelTypeChoices,
-        default=TunnelTypeChoices.IPSEC_TUNNEL
-    )
-    src_address = models.CharField(
-        verbose_name='Source Address',
-        max_length=28,
-        blank=True
-    )
-    peer_address = models.CharField(
-        verbose_name='Peer Address',
-        max_length=28,
-        blank=True
-    )
-    psk = models.CharField(
-        verbose_name='Pre-shared Key',
-        max_length=100,
-        blank=True
-    )
+    tunnel_type = models.CharField(max_length=30, choices=TunnelTypeChoices, default=TunnelTypeChoices.IPSEC_TUNNEL)
+    src_address = models.CharField(verbose_name="Source Address", max_length=28, blank=True)
+    dst_address = models.CharField(verbose_name="Dest Address", max_length=28, blank=True)
+    psk = models.CharField(verbose_name="Pre-shared Key", max_length=100, blank=True)
 
     class Meta:
-        ordering = ['tunnel_id']
+        ordering = ["tunnel_id"]
 
     def __str__(self):
         return self.name
 
 
-class TunnelDevice(models.Model):
+class TunnelsDevice(models.Model):
     """Tunnel to Device relationship."""
 
-    tunnel = models.ForeignKey(
-        to=Tunnel,
-        on_delete=models.CASCADE,
-        related_name='device'
-    )
-    device = models.OneToOneField(
-        to=Device,
-        on_delete=models.CASCADE,
-        related_name='device_of'
-    )
+    tunnel = models.ForeignKey(to=Tunnels, on_delete=models.CASCADE, related_name="device")
+    device = models.OneToOneField(to=Device, on_delete=models.CASCADE, related_name="device_of")
 
     class Meta:
-        ordering = ['tunnel']
+        ordering = ["tunnel"]
