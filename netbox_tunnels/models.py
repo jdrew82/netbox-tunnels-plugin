@@ -13,15 +13,14 @@ limitations under the License.
 
 from django.db import models
 from ipam.models import Device
-from .choices import TunnelStatusChoices
+from .choices import TunnelStatusChoices, TunnelTypeChoices
 
 
 class Tunnel(models.Model):
     """Tunnel model."""
 
-    tunnel_id = models.PositiveSmallIntegerField(
-        primary_key=True,
-        verbose_name='ID'
+    tunnel_id = models.AutoField(
+        primary_key=True
     )
     name = models.CharField(
         max_length=64
@@ -31,7 +30,23 @@ class Tunnel(models.Model):
         choices=TunnelStatusChoices,
         default=TunnelStatusChoices.STATUS_PENDING_CONFIGURATION
     )
-    context = models.CharField(
+    tunnel_type = models.CharField(
+        max_length=30,
+        choices=TunnelTypeChoices,
+        default=TunnelTypeChoices.IPSEC_TUNNEL
+    )
+    src_address = models.CharField(
+        verbose_name='Source Address',
+        max_length=28,
+        blank=True
+    )
+    peer_address = models.CharField(
+        verbose_name='Peer Address',
+        max_length=28,
+        blank=True
+    )
+    psk = models.CharField(
+        verbose_name='Pre-shared Key',
         max_length=100,
         blank=True
     )

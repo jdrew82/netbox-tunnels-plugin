@@ -17,10 +17,10 @@ from extras.plugins import PluginConfig
 class TunnelConfig(PluginConfig):
     """This class defines attributes for the NetBox Tunnels Plugin."""
 
-    name = 'netbox-tunnels-plugin'
+    name = 'netbox_tunnels'
     verbose_name = 'Tunnels'
-    description = 'Netbox Tunnels Plugin'
-    version = '0.2.2'
+    description = 'Netbox Tunnels'
+    version = '0.2.3'
     base_url = 'tunnels'
     author = 'Justin Drew'
     author_email = '***REMOVED***'

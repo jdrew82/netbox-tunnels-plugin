@@ -22,5 +22,5 @@ class TunnelAdmin(admin.ModelAdmin):
         "tunnel_id",
         "name",
         "status",
-        "context"
+        "tunnel_type"
     )

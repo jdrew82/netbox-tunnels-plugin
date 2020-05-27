@@ -17,26 +17,26 @@ from utilities.choices import ButtonColorChoices
 
 menu_items = (
     PluginMenuItem(
-        link='plugins:netbox-tunnels-plugin:list_tunnels',
+        link='plugins:netbox_tunnels:list_tunnels',
         link_text='Tunnels',
-        permissions=[],
+        permissions=["netbox_tunnels.view_tunnels"],
         buttons=(
-            # Link to the admin view to add a tunnel if user has "add_tunnels" permission.
+            # Link to the plugins view to add a tunnel if user has "add_tunnels" permission.
             PluginMenuButton(
-                link='admin:netbox-tunnels-plugin_tunnels_add',
+                link='plugins:netbox_tunnels_tunnels_add',
                 title='Add a new tunnel',
                 icon_class='fa fa-plus',
                 color=ButtonColorChoices.GREEN,
-                permissions=['netbox-tunnels-plugin.add_tunnels']
+                permissions=['netbox_tunnels.add_tunnels']
             ),
-            # Links to the admin view to assign a tunnel to a device if user has the "add_tunnels"
+            # Links to the plugins view to assign a tunnel to a device if user has the "add_tunnels"
             # permission.
             PluginMenuButton(
-                link='admin:netbox-tunnels-plugin_tunnels_add',
+                link='plugins:netbox_tunnels_tunnels_add',
                 title='Assign a tunnel to a device',
                 icon_class='fa fa-plus',
                 color=ButtonColorChoices.BLUE,
-                permissions=['netbox-tunnels-plugin.add_tunnels']
+                permissions=['netbox_tunnels.add_tunnels']
             ),
         )
     ),
