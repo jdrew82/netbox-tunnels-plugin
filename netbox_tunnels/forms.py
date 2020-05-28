@@ -18,7 +18,7 @@ from utilities.forms import BootstrapMixin
 from dcim.models import Site, Platform, DeviceRole, DeviceType
 from extras.forms import CustomFieldModelCSVForm
 
-from .models import Tunnels
+from .models import Tunnel
 from .choices import TunnelStatusChoices, TunnelTypeChoices
 from .utils.credentials import Credentials
 
@@ -45,7 +45,7 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
     )
 
     class Meta:
-        model = Tunnels
+        model = Tunnel
         fields = [
             "src_address",
             "dst_address",
@@ -70,8 +70,8 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
     psk = forms.CharField(required=False, help_text="Pre-shared key, will not be stored in database")
 
     class Meta:
-        model = Tunnels
-        fields = Tunnels.csv_headers
+        model = Tunnel
+        fields = Tunnel.csv_headers
 
     def save(self, commit=True, **kwargs):
         """Save the model, and add it and the associated PSK."""

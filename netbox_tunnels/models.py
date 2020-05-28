@@ -16,8 +16,8 @@ from ipam.models import Device
 from .choices import TunnelStatusChoices, TunnelTypeChoices
 
 
-class Tunnels(models.Model):
-    """Tunnels model."""
+class Tunnel(models.Model):
+    """Tunnel model."""
 
     tunnel_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=64)
@@ -36,10 +36,10 @@ class Tunnels(models.Model):
         return self.name
 
 
-class TunnelsDevice(models.Model):
+class TunnelDevice(models.Model):
     """Tunnel to Device relationship."""
 
-    tunnel = models.ForeignKey(to=Tunnels, on_delete=models.CASCADE, related_name="device")
+    tunnel = models.ForeignKey(to=Tunnel, on_delete=models.CASCADE, related_name="device")
     device = models.OneToOneField(to=Device, on_delete=models.CASCADE, related_name="device_of")
 
     class Meta:

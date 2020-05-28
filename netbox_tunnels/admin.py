@@ -11,18 +11,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from django.contrib import admin
-from .models import Tunnels, TunnelsDevice
+from .models import Tunnel, TunnelDevice
 
 
-@admin.register(Tunnels)
-class TunnelsAdmin(admin.ModelAdmin):
+@admin.register(Tunnel)
+class TunnelAdmin(admin.ModelAdmin):
     """Administrative view for managing Tunnels instances."""
 
     list_display = ("tunnel_id", "name", "status", "tunnel_type")
 
 
-@admin.register(TunnelsDevice)
-class TunnelsDeviceAdmin(admin.ModelAdmin):
+@admin.register(TunnelDevice)
+class TunnelDeviceAdmin(admin.ModelAdmin):
     """Administrative view for managing Tunnels to Device instances."""
 
-    list_display = ("tunnels", "device")
+    list_display = ("tunnel", "device")
