@@ -33,7 +33,7 @@ menu_items = (
             PluginMenuButton(
                 link="plugins:netbox_tunnels:tunnels_import",
                 title="Assign a tunnel to a device",
-                icon_class="fa fa-plus",
+                icon_class="fa fa-download",
                 color=ButtonColorChoices.BLUE,
                 permissions=["netbox_tunnels.add_tunnels"],
             ),
