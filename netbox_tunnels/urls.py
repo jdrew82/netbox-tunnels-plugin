@@ -15,13 +15,15 @@ from django.urls import path
 from .views import (
     TunnelListView,
     TunnelCreateView,
-    # TunnelBulkDeleteView,
-    # TunnelFeedBulkImportView,
+    TunnelBulkDeleteView,
+    TunnelFeedBulkImportView,
 )
+
+app_name = "tunnels"
 
 urlpatterns = [
     path("", TunnelListView.as_view(), name="tunnels_list"),
     path("add/", TunnelCreateView.as_view(), name="tunnels_creation"),
-    # path("delete/", TunnelBulkDeleteView.as_view(), name="tunnels_bulk_delete"),
-    # path("import/", TunnelFeedBulkImportView.as_view(), name="tunnels_import"),
+    path("delete/", TunnelBulkDeleteView.as_view(), name="tunnels_bulk_delete"),
+    path("import/", TunnelFeedBulkImportView.as_view(), name="tunnels_import"),
 ]
