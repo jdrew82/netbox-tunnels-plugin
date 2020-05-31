@@ -15,12 +15,11 @@ from django import forms
 from django_rq import get_queue
 
 from utilities.forms import BootstrapMixin
-from dcim.models import Site, Platform, DeviceRole, DeviceType
+from dcim.models import Device, Platform, DeviceRole, DeviceType
 from extras.forms import CustomFieldModelCSVForm
 
 from .models import Tunnel
 from .choices import TunnelStatusChoices, TunnelTypeChoices
-from .utils.credentials import Credentials
 
 BLANK_CHOICE = (("", "---------"),)
 
@@ -28,20 +27,23 @@ BLANK_CHOICE = (("", "---------"),)
 class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
     """Form for creating a new tunnel."""
 
+    name = forms.CharField(required=True, label="Tunnel name", help_text="Name of tunnel")
+
+    status = forms.ChoiceField(choices=BLANK_CHOICE + TunnelStatusChoices.CHOICES, required=False)
+
+    tunnel_type = forms.ChoiceField(
+        choices=TunnelTypeChoices.CHOICES,
+        required=True,
+        label="Tunnel type",
+        help_text="Tunnel type. This must be specified.",
+    )
+
     src_address = forms.CharField(required=True, label="Source IP address", help_text="IP address of the source device")
 
     dst_address = forms.CharField(required=True, label="Peer IP address", help_text="IP address of the peer device")
 
-    tunnel_type = forms.ModelChoiceField(
-        queryset=TunnelTypeChoices.objects.all(),
-        required=True,
-        label="Tunnel type",
-        to_field_name="slug",
-        help_text="Tunnel type. This must be specified.",
-    )
-
     psk = forms.CharField(
-        required=False, widget=forms.PasswordInput, help_text="Pre-shared key (will not be stored in database)"
+        required=False, widget=forms.PasswordInput, help_text="Pre-shared key"
     )
 
     class Meta:
@@ -53,12 +55,23 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
             "tunnel_type",
         ]
 
-    def save(self, commit=True, **kwargs):
-        """Save the model, and add it and the associated PSK."""
-        model = super().save(commit=commit, **kwargs)
-        if commit:
-            credentials = Credentials(self.data.get("psk"))
-        return model
+class TunnelFilterForm(BootstrapMixin, forms.ModelForm):
+    """Form for filtering Tunnel instances."""
+
+    device = forms.ModelChoiceField(queryset=Device.objects.all(), required=False, to_field_name="slug")
+
+    status = forms.ChoiceField(choices=BLANK_CHOICE + TunnelStatusChoices.CHOICES, required=False)
+
+    q = forms.CharField(required=False, label="Search")
+
+    class Meta:
+        model = Tunnel
+        fields = [
+            "src_address",
+            "dst_address",
+            "psk",
+            "tunnel_type",
+        ]
 
 
 class TunnelCreationCSVForm(CustomFieldModelCSVForm):
@@ -67,7 +80,7 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
     src_address = forms.CharField(required=True, help_text="IP Address of the source device")
     dst_address = forms.CharField(required=True, help_text="IP Address of the peer device")
     tunnel_type = forms.CharField(required=True, help_text="Specified tunnel type.")
-    psk = forms.CharField(required=False, help_text="Pre-shared key, will not be stored in database")
+    psk = forms.CharField(required=True, help_text="Pre-shared key")
 
     class Meta:
         model = Tunnel
@@ -76,6 +89,6 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
     def save(self, commit=True, **kwargs):
         """Save the model, and add it and the associated PSK."""
         model = super().save(commit=commit, **kwargs)
-        if commit:
-            credentials = Credentials(self.data.get("psk"))
+        # if commit:
+        #     credentials = Credentials(self.data.get("psk"))
         return model
