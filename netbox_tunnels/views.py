@@ -11,42 +11,60 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-import logging
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.views.generic import View
 from utilities.views import BulkDeleteView, BulkImportView, ObjectEditView, ObjectListView
 
 from .filters import TunnelFilter
-from .forms import TunnelCreationForm, TunnelCreationCSVForm
+from .forms import TunnelCreationForm, TunnelFilterForm, TunnelCreationCSVForm
 from .models import Tunnel
 
-log.setLevel(logging.DEBUG)
+
+# class ListTunnelView(View):
+#     """List all tunnels."""
+
+#     def get(self, request):
+#         tunnels = Tunnel.objects.all()
+#         return render(request, 'netbox_tunnels/tunnels_list.html', {
+#             'tunnels': tunnels,
+#         })
 
 
-class TunnelListView(PermissionRequiredMixin, ObjectListView):
+class TunnelView(View):
+    """Single tunnel view, identified by ID."""
+
+    def get(self, request, tunnel_id):
+        tunnel = get_object_or_404(Tunnel.objects.filter(tunnel_id=tunnel_id))
+        # vlans = [VLAN.objects.get(pk=vid) for vid in vlan_ids]
+
+        return render(request, 'netbox_tunnels/tunnel.html', {
+            'tunnel': tunnel,
+        })
+
+
+class ListTunnelView(PermissionRequiredMixin, ObjectListView):
     """View for listing all Tunnels."""
 
-    def get(self, request):
-        tunnels = Tunnel.objects.all()
-        return render(request, "netbox_tunnels/tunnels_list.html", {"tunnels": tunnels,})
-
     permission_required = "netbox_tunnels.view_tunnels"
-    # queryset = Tunnels.objects.all().order_by("-id")
+    queryset = Tunnel.objects.all().order_by("-id")
     filterset = TunnelFilter
-    # template_name = "netbox_tunnels/tunnels_list.html"
+    filterset_form = TunnelFilterForm
+    template_name = "netbox_tunnels/tunnels_list.html"
 
 
-class TunnelCreateView(PermissionRequiredMixin, ObjectEditView):
+class CreateTunnelView(PermissionRequiredMixin, ObjectEditView):
     """View for creating a new Tunnels."""
 
     permission_required = "netbox_tunnels.tunnels_creation"
     model = Tunnel
     queryset = Tunnel.objects.all()
     model_form = TunnelCreationForm
-    template_name = "netbox_tunnels/tunnels_creation.html"
+    template_name = "netbox_tunnels/tunnel_edit.html"
     default_return_url = "plugins:netbox_tunnels:tunnels_list"
 
 
-class TunnelBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
+class BulkDeleteTunnelView(PermissionRequiredMixin, BulkDeleteView):
     """View for deleting one or more Tunnels."""
     
     permission_required = "netbox_tunnels.delete_tunnels"
@@ -54,7 +72,7 @@ class TunnelBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
     default_return_url = "plugins:netbox_tunnels:tunnels_list"
 
  
-class TunnelFeedBulkImportView(PermissionRequiredMixin, BulkImportView):
+class BulkImportTunnelView(PermissionRequiredMixin, BulkImportView):
     """View for bulk-importing a CSV file to create Tunnels."""
     
     permission_required = "netbox_tunnels.add_tunnels"
