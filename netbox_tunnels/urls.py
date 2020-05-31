@@ -13,17 +13,15 @@ limitations under the License.
 from django.urls import path
 
 from .views import (
-    TunnelListView,
-    TunnelCreateView,
-    TunnelBulkDeleteView,
-    TunnelFeedBulkImportView,
+    ListTunnelView,
+    CreateTunnelView,
+    BulkDeleteTunnelView,
+    BulkImportTunnelView,
 )
 
-app_name = "tunnels"
-
 urlpatterns = [
-    path("", TunnelListView.as_view(), name="tunnels_list"),
-    path("add/", TunnelCreateView.as_view(), name="tunnels_creation"),
-    path("delete/", TunnelBulkDeleteView.as_view(), name="tunnels_bulk_delete"),
-    path("import/", TunnelFeedBulkImportView.as_view(), name="tunnels_import"),
+    path("", ListTunnelView.as_view(), name="tunnels_list"),
+    path("add/", CreateTunnelView.as_view(), name="tunnel_creation"),
+    path("delete/", BulkDeleteTunnelView.as_view(), name="tunnels_bulk_delete"),
+    path("import/", BulkImportTunnelView.as_view(), name="tunnels_import"),
 ]
