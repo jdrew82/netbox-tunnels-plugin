@@ -19,15 +19,11 @@ class TunnelTable(BaseTable):
     """Table for displaying Tunnel instances."""
 
     pk = ToggleColumn()
-    name = tables.LinkColumn()
-    status = tables.LinkColumn()
-    tunnel_type = tables.LinkColumn()
-    src_address = tables.LinkColumn()
-    dst_address = tables.LinkColumn()
 
     class Meta(BaseTable.Meta):
         model = Tunnel
         fields = [
+            "pk",
             "name",
             "status",
             "tunnel_type",
@@ -43,6 +39,7 @@ class TunnelBulkTable(BaseTable):
     class Meta(BaseTable.Meta):  # noqa: D106 "Missing docstring in public nested class"
         model = Tunnel
         fields = (
+            "pk",
             "name",
             "status",
             "tunnel_type",
