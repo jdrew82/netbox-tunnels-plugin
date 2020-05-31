@@ -27,7 +27,7 @@ BLANK_CHOICE = (("", "---------"),)
 class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
     """Form for creating a new tunnel."""
 
-    name = forms.CharField(required=True, label="Tunnel name", help_text="Name of tunnel")
+    name = forms.CharField(required=True, label="Name", help_text="Name of tunnel")
 
     status = forms.ChoiceField(choices=BLANK_CHOICE + TunnelStatusChoices.CHOICES, required=False)
 
@@ -42,18 +42,19 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
 
     dst_address = forms.CharField(required=True, label="Peer IP address", help_text="IP address of the peer device")
 
-    psk = forms.CharField(
-        required=False, widget=forms.PasswordInput, help_text="Pre-shared key"
-    )
+    psk = forms.CharField(required=False, label="Pre-shared Key", widget=forms.PasswordInput, help_text="Pre-shared key")
 
     class Meta:
         model = Tunnel
         fields = [
+            "name",
+            "status",
+            "tunnel_type",
             "src_address",
             "dst_address",
             "psk",
-            "tunnel_type",
         ]
+
 
 class TunnelFilterForm(BootstrapMixin, forms.ModelForm):
     """Form for filtering Tunnel instances."""
