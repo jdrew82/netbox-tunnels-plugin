@@ -29,6 +29,15 @@ class Tunnel(models.Model):
     dst_address = models.CharField(verbose_name="Dest Address", max_length=28, blank=True)
     psk = models.CharField(verbose_name="Pre-shared Key", max_length=100, blank=True)
 
+    csv_headers = [
+        "name",
+        "status",
+        "tunnel_type",
+        "src_address",
+        "dst_address",
+        "psk",
+    ]
+
     class Meta:
         ordering = ["tunnel_id"]
 
