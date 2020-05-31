@@ -21,16 +21,6 @@ from .forms import TunnelCreationForm, TunnelFilterForm, TunnelCreationCSVForm
 from .models import Tunnel
 
 
-# class ListTunnelView(View):
-#     """List all tunnels."""
-
-#     def get(self, request):
-#         tunnels = Tunnel.objects.all()
-#         return render(request, 'netbox_tunnels/tunnels_list.html', {
-#             'tunnels': tunnels,
-#         })
-
-
 class TunnelView(View):
     """Single tunnel view, identified by ID."""
 
