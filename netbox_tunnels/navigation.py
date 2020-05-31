@@ -23,16 +23,16 @@ menu_items = (
         buttons=(
             # Link to the plugins view to add a tunnel if user has "add_tunnels" permission.
             PluginMenuButton(
-                link="plugins:netbox_tunnels:tunnels_creation",
+                link="plugins:netbox_tunnels:tunnel_creation",
                 title="Add a new tunnel",
                 icon_class="fa fa-plus",
                 color=ButtonColorChoices.GREEN,
                 permissions=["netbox_tunnels.add_tunnels"],
             ),
-            # Links to the plugins view to assign a tunnel to a device if user has the "add_tunnels" permission.
+            # Links to the plugins view to bulk import tunnels if user has the "add_tunnels" permission.
             PluginMenuButton(
                 link="plugins:netbox_tunnels:tunnels_import",
-                title="Assign a tunnel to a device",
+                title="Bulk import tunnels",
                 icon_class="fa fa-download",
                 color=ButtonColorChoices.BLUE,
                 permissions=["netbox_tunnels.add_tunnels"],
