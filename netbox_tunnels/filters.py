@@ -18,7 +18,7 @@ from django.db.models import Q
 from dcim.models import Site, DeviceRole, Platform
 from utilities.filters import NameSlugSearchFilterSet
 
-from .models import Tunnels
+from .models import Tunnel
 
 
 class TunnelFilter(NameSlugSearchFilterSet):
@@ -27,19 +27,19 @@ class TunnelFilter(NameSlugSearchFilterSet):
     q = django_filters.CharFilter(method="search", label="Search",)
 
     name = django_filters.ModelMultipleChoiceFilter(
-        field_name="name__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Name (slug)",
+        field_name="name__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Name (slug)",
     )
 
     status = django_filters.ModelMultipleChoiceFilter(
-        field_name="status__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Status (slug)",
+        field_name="status__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Status (slug)",
     )
 
     tunnel_type = django_filters.ModelMultipleChoiceFilter(
-        field_name="context__slug", queryset=Tunnels.objects.all(), to_field_name="slug", label="Tunnel Type (slug)",
+        field_name="tunnel_type__slug", queryset=Tunnel.objects.all(), to_field_name="slug", label="Tunnel Type (slug)",
     )
 
     class Meta:
-        model = Tunnels
+        model = Tunnel
         fields = ["name", "status", "tunnel_type"]
 
     def search(self, queryset, name, value):
