@@ -19,22 +19,25 @@ from utilities.views import BulkDeleteView, BulkImportView, ObjectEditView, Obje
 from .filters import TunnelFilter
 from .forms import TunnelCreationForm, TunnelFilterForm, TunnelCreationCSVForm
 from .models import Tunnel
+from .tables import TunnelTable, TunnelBulkTable
 
 
 class ListTunnelView(PermissionRequiredMixin, ObjectListView):
     """View for listing all Tunnels."""
 
     permission_required = "netbox_tunnels.view_tunnels"
-    queryset = Tunnel.objects.all().order_by("-id")
+    model = Tunnel
+    queryset = Tunnel.objects.all().order_by("tunnel_id")
     filterset = TunnelFilter
     filterset_form = TunnelFilterForm
+    table = TunnelTable
     template_name = "netbox_tunnels/tunnels_list.html"
 
 
 class CreateTunnelView(PermissionRequiredMixin, ObjectEditView):
     """View for creating a new Tunnels."""
 
-    permission_required = "netbox_tunnels.tunnels_creation"
+    permission_required = "netbox_tunnels.add_tunnels"
     model = Tunnel
     queryset = Tunnel.objects.all()
     model_form = TunnelCreationForm
@@ -47,12 +50,14 @@ class BulkDeleteTunnelView(PermissionRequiredMixin, BulkDeleteView):
     
     permission_required = "netbox_tunnels.delete_tunnels"
     queryset = Tunnel.objects.filter()
+    table = TunnelTable
     default_return_url = "plugins:netbox_tunnels:tunnels_list"
 
- 
+
 class BulkImportTunnelView(PermissionRequiredMixin, BulkImportView):
     """View for bulk-importing a CSV file to create Tunnels."""
     
     permission_required = "netbox_tunnels.add_tunnels"
     model_form = TunnelCreationCSVForm
+    tunnel = TunnelBulkTable
     default_return_url = "plugins:netbox_tunnels:tunnels_list"
