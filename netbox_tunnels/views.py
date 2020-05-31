@@ -21,18 +21,6 @@ from .forms import TunnelCreationForm, TunnelFilterForm, TunnelCreationCSVForm
 from .models import Tunnel
 
 
-class TunnelView(View):
-    """Single tunnel view, identified by ID."""
-
-    def get(self, request, tunnel_id):
-        tunnel = get_object_or_404(Tunnel.objects.filter(tunnel_id=tunnel_id))
-        # vlans = [VLAN.objects.get(pk=vid) for vid in vlan_ids]
-
-        return render(request, 'netbox_tunnels/tunnel.html', {
-            'tunnel': tunnel,
-        })
-
-
 class ListTunnelView(PermissionRequiredMixin, ObjectListView):
     """View for listing all Tunnels."""
 
