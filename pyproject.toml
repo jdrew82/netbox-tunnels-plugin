@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "netbox-tunnels"
+name = "netbox-tunnels-plugin"
 version = "0.3.0"
 description = "A plugin for Netbox to document network tunnels"
 authors = ["Justin Drew <***REMOVED***>"]
