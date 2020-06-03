@@ -1,0 +1,43 @@
+---
+language: python
+python:
+- '3.6'
+- '3.7'
+- '3.8'
+env:
+# Each version of NetBox listed here must have a corresponding directory/configuration file 
+# under development/netbox_<NETBOX_VER>/configuration.py
+  matrix:
+  - NETBOX_VER=v2.8.3
+  - NETBOX_VER=master
+# Encrypted value for PYPI_TOKEN, this secret has been generated with the following command
+#   travis encrypt PYPI_TOKEN=<value> --add env.global --com
+# Might need to update it once the repo is publish (travis-ci.org vs travis-ci.com)
+  global:
+    secure: "ckGRIbf55Zt01nmo/im4xu7yESAWhmIxWhF0EioLOcRFBBx4YBL3j2ulU37ycdxygduYUlAlkcsfjrnlqDaxQYiScqll5jAa1iXinMYtP40KKx/nKwHZs0XTCq6hyEjexbWSctzKh6LmY35E3vNFB58AWG6bEXPJIWgajyykyMOBe6NvqZ6sAyqUgNw5S78W69L6ivEoItDTtTYSX0ohohMfJxFdJ/VusOjTzbga5nhwdYIsYtigjOW82XZI2Vpbm3N4y5iq7mU0PM+Ae5tf5x2P6SPynHgckoEsIMAs2ukRySVe7rxPP1r9sspEBQ6nYQXxQpaIn/1I4m5OdhwhvY5Vg/afbNklQBJwKSidA4Z2TgyDKoaohohwmBag0yPiHVYdpmy9InSukekwuuoBjFTkMiPIxhzBzOscBEC3zPZRTBD8Gyvne9Y4Il4ADI8b5Uj0mb5ksQBXXaKMxLybKCB/DLKXhu1tZ14Zh9XR21MlnX9YwzumOB7Wj3EGqL08R7aEz/fcKdzdUwY6kwAgDhdKm2hJw49EmYWsaKtnEkDckS6SoUi7vSOCn51RA663KpV5qxmAn7cH2yZH8b+F30HtOD81a2n9P4tGMtYCPZExIGcancXcwHYm7fDe7vd5xtpRRRam6b1eTy0FcaQ10/JzjYM+P4i4GSQ9RRH9xJ4="
+services:
+- docker
+# --------------------------------------------------------------------------
+# Tests
+# --------------------------------------------------------------------------
+before_script:
+- pip install invoke docker-compose
+- curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py > /tmp/get-poetry.py
+- python /tmp/get-poetry.py -y --version 1.0.2
+- source $HOME/.poetry/env
+
+script:
+- invoke build --python-ver $TRAVIS_PYTHON_VERSION
+- invoke tests --python-ver $TRAVIS_PYTHON_VERSION
+# --------------------------------------------------------------------------
+# Deploy
+# --------------------------------------------------------------------------
+deploy:
+  provider: script
+  script: poetry config pypi-token.pypi $PYPI_TOKEN && poetry publish --build
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
+    condition: $NETBOX_VER = master
+    python: 3.7
