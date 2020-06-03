@@ -10,7 +10,7 @@ if os.path.exists("README.md"):
 
 setup(
     name="netbox-tunnels",
-    version="0.3.1",
+    version="0.3.2",
     description="A plugin for NetBox to support documentation of network tunneling protocols, ie IPsec, GRE, L2TP, etc.",
     long_description=readme,
     long_description_content_type="text/markdown",
