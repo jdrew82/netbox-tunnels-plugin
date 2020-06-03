@@ -31,6 +31,7 @@ class TunnelTable(BaseTable):
             "dst_address",
         ]
 
+
 class TunnelBulkTable(BaseTable):
     """Table for displaying Tunnel imports."""
 

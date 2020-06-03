@@ -42,7 +42,9 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
 
     dst_address = forms.CharField(required=True, label="Peer IP address", help_text="IP address of the peer device")
 
-    psk = forms.CharField(required=False, label="Pre-shared Key", widget=forms.PasswordInput, help_text="Pre-shared key")
+    psk = forms.CharField(
+        required=False, label="Pre-shared Key", widget=forms.PasswordInput, help_text="Pre-shared key"
+    )
 
     class Meta:
         model = Tunnel

@@ -9,34 +9,40 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('dcim', '0105_interface_name_collation'),
+        ("dcim", "0105_interface_name_collation"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Tunnel',
+            name="Tunnel",
             fields=[
-                ('tunnel_id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=64)),
-                ('status', models.CharField(default='pending-configuration', max_length=30)),
-                ('tunnel_type', models.CharField(default='ipsec-tunnel', max_length=30)),
-                ('src_address', models.CharField(blank=True, max_length=28)),
-                ('dst_address', models.CharField(blank=True, max_length=28)),
-                ('psk', models.CharField(blank=True, max_length=100)),
+                ("tunnel_id", models.AutoField(primary_key=True, serialize=False)),
+                ("name", models.CharField(max_length=64)),
+                ("status", models.CharField(default="pending-configuration", max_length=30)),
+                ("tunnel_type", models.CharField(default="ipsec-tunnel", max_length=30)),
+                ("src_address", models.CharField(blank=True, max_length=28)),
+                ("dst_address", models.CharField(blank=True, max_length=28)),
+                ("psk", models.CharField(blank=True, max_length=100)),
             ],
-            options={
-                'ordering': ['tunnel_id'],
-            },
+            options={"ordering": ["tunnel_id"],},
         ),
         migrations.CreateModel(
-            name='TunnelDevice',
+            name="TunnelDevice",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False)),
-                ('device', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='device_of', to='dcim.Device')),
-                ('tunnel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='device', to='netbox_tunnels.Tunnel')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False)),
+                (
+                    "device",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE, related_name="device_of", to="dcim.Device"
+                    ),
+                ),
+                (
+                    "tunnel",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, related_name="device", to="netbox_tunnels.Tunnel"
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['tunnel'],
-            },
+            options={"ordering": ["tunnel"],},
         ),
     ]

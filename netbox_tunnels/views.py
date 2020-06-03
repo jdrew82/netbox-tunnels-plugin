@@ -47,7 +47,7 @@ class CreateTunnelView(PermissionRequiredMixin, ObjectEditView):
 
 class BulkDeleteTunnelView(PermissionRequiredMixin, BulkDeleteView):
     """View for deleting one or more Tunnels."""
-    
+
     permission_required = "netbox_tunnels.delete_tunnels"
     queryset = Tunnel.objects.filter()
     table = TunnelTable
@@ -56,7 +56,7 @@ class BulkDeleteTunnelView(PermissionRequiredMixin, BulkDeleteView):
 
 class BulkImportTunnelView(PermissionRequiredMixin, BulkImportView):
     """View for bulk-importing a CSV file to create Tunnels."""
-    
+
     permission_required = "netbox_tunnels.add_tunnels"
     model_form = TunnelCreationCSVForm
     tunnel = TunnelBulkTable
