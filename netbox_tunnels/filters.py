@@ -1,6 +1,6 @@
 """Filtering logic for Tunnel instances.
 
-(c) 2020 Network To Code
+(c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -39,6 +39,8 @@ class TunnelFilter(NameSlugSearchFilterSet):
     )
 
     class Meta:
+        """Class to define what is used for filtering tunnels with the search box."""
+
         model = Tunnel
         fields = ["name", "status", "tunnel_type"]
 

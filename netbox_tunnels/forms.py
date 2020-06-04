@@ -1,4 +1,5 @@
 """Forms for tunnel creation.
+
 (c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -47,6 +48,8 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
     )
 
     class Meta:
+        """Class to define what is used to create a new network tunnel."""
+
         model = Tunnel
         fields = [
             "name",
@@ -68,6 +71,8 @@ class TunnelFilterForm(BootstrapMixin, forms.ModelForm):
     q = forms.CharField(required=False, label="Search")
 
     class Meta:
+        """Class to define what is used for filtering tunnels with the search box."""
+
         model = Tunnel
         fields = [
             "src_address",
@@ -86,6 +91,8 @@ class TunnelCreationCSVForm(CustomFieldModelCSVForm):
     psk = forms.CharField(required=True, help_text="Pre-shared key")
 
     class Meta:
+        """Class to define what is used for bulk import of tunnels form using CSV."""
+
         model = Tunnel
         fields = Tunnel.csv_headers
 

@@ -1,4 +1,5 @@
 """Tables for Tunnels.
+
 (c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,11 +17,13 @@ from .models import Tunnel
 
 
 class TunnelTable(BaseTable):
-    """Table for displaying Tunnel instances."""
+    """Table for displaying configured Tunnel instances."""
 
     pk = ToggleColumn()
 
     class Meta(BaseTable.Meta):
+        """Class to define what is used for tunnl_lists.html template to show configured tunnels."""
+
         model = Tunnel
         fields = [
             "pk",
@@ -37,7 +40,9 @@ class TunnelBulkTable(BaseTable):
 
     pk = tables.LinkColumn()
 
-    class Meta(BaseTable.Meta):  # noqa: D106 "Missing docstring in public nested class"
+    class Meta(BaseTable.Meta):
+        """Class to define what is used for bulk import of tunnels."""
+
         model = Tunnel
         fields = (
             "pk",

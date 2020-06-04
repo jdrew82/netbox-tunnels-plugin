@@ -1,4 +1,5 @@
 """Tunnel Django model.
+
 (c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -39,9 +40,12 @@ class Tunnel(models.Model):
     ]
 
     class Meta:
+        """Class to define what will be used to set order based on. Will be using the unique tunnel ID for this purpose."""
+
         ordering = ["tunnel_id"]
 
     def __str__(self):
+        """Class to define what identifies the Tunnel object. Will be using name for this."""
         return self.name
 
 
@@ -52,4 +56,6 @@ class TunnelDevice(models.Model):
     device = models.OneToOneField(to=Device, on_delete=models.CASCADE, related_name="device_of")
 
     class Meta:
+        """Class to define what will be used to set order based on. Will be using the unique tunnel for this purpose."""
+
         ordering = ["tunnel"]
