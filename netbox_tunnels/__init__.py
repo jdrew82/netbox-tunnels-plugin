@@ -33,4 +33,4 @@ class TunnelsConfig(PluginConfig):
     # caching_config = {}
 
 
-config = TunnelsConfig
+config = TunnelsConfig  # pylint:disable=invalid-name

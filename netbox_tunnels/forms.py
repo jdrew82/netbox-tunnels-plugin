@@ -13,10 +13,9 @@ limitations under the License.
 """
 
 from django import forms
-from django_rq import get_queue
 
 from utilities.forms import BootstrapMixin
-from dcim.models import Device, Platform, DeviceRole, DeviceType
+from dcim.models import Device
 from extras.forms import CustomFieldModelCSVForm
 
 from .models import Tunnel

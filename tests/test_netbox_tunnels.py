@@ -11,6 +11,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+from django.contrib.auth.models import User, Permission
+from django.test import Client, TestCase, override_settings
+from django.urls import reverse
+from dcim.models import Site
+
 from netbox_tunnels.models import Tunnel
 
 

@@ -12,8 +12,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.shortcuts import get_object_or_404, get_list_or_404, render
-from django.views.generic import View
 from utilities.views import BulkDeleteView, BulkImportView, ObjectEditView, ObjectListView
 
 from .filters import TunnelFilter

@@ -15,7 +15,6 @@ limitations under the License.
 import django_filters
 from django.db.models import Q
 
-from dcim.models import Site, DeviceRole, Platform
 from utilities.filters import NameSlugSearchFilterSet
 
 from .models import Tunnel
