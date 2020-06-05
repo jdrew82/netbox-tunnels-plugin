@@ -63,7 +63,7 @@ class TunnelCreationForm(BootstrapMixin, forms.ModelForm):
 class TunnelFilterForm(BootstrapMixin, forms.ModelForm):
     """Form for filtering Tunnel instances."""
 
-    device = forms.ModelChoiceField(queryset=Device.objects.all(), required=False, to_field_name="slug")
+    device = forms.ModelChoiceField(queryset=Device.objects.all(), required=False)
 
     status = forms.ChoiceField(choices=BLANK_CHOICE + TunnelStatusChoices.CHOICES, required=False)
 
