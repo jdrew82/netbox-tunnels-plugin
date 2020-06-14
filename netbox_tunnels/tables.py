@@ -1,4 +1,4 @@
-"""Tables for Tunnels.
+"""Tables for displaying list of configured Tunnels.
 
 (c) 2020 Justin Drew
 Licensed under the Apache License, Version 2.0 (the "License");
