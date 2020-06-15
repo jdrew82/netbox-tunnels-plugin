@@ -1,8 +1,14 @@
 [tool.poetry]
 name = "netbox-tunnels-plugin"
+<<<<<<< HEAD
 version = "0.3.5"
 description = "A plugin for Netbox to document network tunnels"
 authors = ["Justin Drew <jdrew82@users.noreply.github.com>"]
+=======
+version = "0.3.4"
+description = "A plugin for Netbox to document network tunnels"
+authors = ["Justin Drew <***REMOVED***>"]
+>>>>>>> cfbd4fd49ba69e230985c7a045c5de7a69c34d94
 license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/jdrew82/netbox-tunnels-plugin"
