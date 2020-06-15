@@ -12,7 +12,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-__version__ = "0.3.4"
+__version__ = "0.3.5"
 
 from extras.plugins import PluginConfig
 
@@ -26,7 +26,7 @@ class TunnelsConfig(PluginConfig):
     description = "Network Tunnels"
     base_url = "netbox_tunnels"
     author = "Justin Drew"
-    author_email = "***REMOVED***"
+    author_email = "jdrew82@users.noreply.github.com"
     min_version = "2.8.3"
     required_settings = []
     # default_settings = {}
