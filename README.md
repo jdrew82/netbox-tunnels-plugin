@@ -23,10 +23,10 @@ pip install netbox-tunnels-plugin
 Once installed, the plugin needs to be enabled in your `configuration.py`
 ```python
 # In your configuration.py
-PLUGINS = ["netbox-tunnels-plugin"]
+PLUGINS = ["netbox_tunnels"]
 
 # PLUGINS_CONFIG = {
-#   "netbox-tunnels-plugin": {
+#   "netbox_tunnels": {
 #     ADD YOUR SETTINGS HERE
 #   }
 # }
